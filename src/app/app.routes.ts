@@ -5,14 +5,13 @@ import { CambioPasswordComponent } from './Component/cambio-password/cambio-pass
 import { HomeComponent } from './Component/home/home.component';
 import { RegistroComponent } from './Component/registro/registro.component';
 import { PerfilComponent } from './Component/perfil/perfil.component';
-import { MenuDefinitionComponent } from './Component/menu-definition/menu-definition.component';
 
 export const routes: Routes = [
     {path:'register', component: RegistroComponent},
     {path:'login', component: LoginComponent},
     {
         path:'',
-        component: MenuDefinitionComponent,
+        component: MenuComponent,
         children:[
             {path: '', redirectTo: 'home', pathMatch: 'full' },
             {path:'profile', component: PerfilComponent},

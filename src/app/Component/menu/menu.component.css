@@ -73,7 +73,7 @@
       }
     }
   
-    :is(&-text) {
+    :is(.sidebar-item-text) {
       opacity: 1;
       transition: opacity 0.3s ease-in-out;
     }
@@ -103,9 +103,8 @@
       i {
         margin-right: 0;
       }
-      &-text,
-      &-text,
-      &-arrow {
+      :is(.sidebar-item-text),
+      .sidebar-item-arrow {
         opacity: 0;
         width: 0;
         overflow: hidden;

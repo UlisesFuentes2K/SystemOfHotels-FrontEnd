@@ -1,44 +1,35 @@
-<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }">
-    <div class="sidebar-header">
-      <a href="#" class="sidebar-logo">{{
-        isSidebarCollapsed ? 'C' : 'CodeWithChintan'
-      }}</a>
-    </div>
-    <div class="sidebar-menu">
-      <ul>
-        <ng-container *ngFor="let item of menuItems">
-          <li class="sidebar-menu-item">
-            <a
-              href="#"
-              class="sidebar-item"
-              [ngClass]="{
-                'has-children': item.children,
-                'menu-item-active': item.isOpen
-              }"
-              (click)="toggleMenuItem(item)"
-            >
-              <i [class]="item.icon"></i>
-              <span class="sidebar-item-text">{{ item.label }}</span>
-              <i
-                *ngIf="item.children && !isSidebarCollapsed"
-                class="fas fa-chevron-down sidebar-item-arrow"
-                [ngClass]="{ rotated: item.isOpen }"
-              ></i>
-            </a>
-  
-            <ul
-              *ngIf="item.children && !isSidebarCollapsed && item.isOpen"
-              class="sidebar-submenu"
-            >
-              <li *ngFor="let child of item.children">
-                <a href="#" class="sidebar-item sidebar-subitem">
-                  <i [class]="child.icon"></i>
-                  <span class="sidebar-item-text">{{ child.label }}</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ng-container>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0)">Logo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynavbar">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Usuarios</a>
+          <ul class="dropdown-menu navbar-dark bg-dark">
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Perfil</a></li>
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Cambio Contraseña</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Reservas</a>
+          <ul class="dropdown-menu navbar-dark bg-dark">
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Reserva</a></li>
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Bitacora</a></li>
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Habitaciones</a></li>
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Calendario</a></li>
+          </ul>
+        </li>
       </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="text" placeholder="Search">
+        <button class="btn btn-primary" type="button">Search</button>
+      </form>
     </div>
   </div>
+</nav>
