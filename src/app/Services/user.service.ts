@@ -114,7 +114,7 @@ export class UserService {
         if(data.idTypePerson !== 1){
             return false;
         }
-        this.storeUserData(data.token, data.userId);
+        this.storeUserData(data.token, data.userId, data.idPerson);
         return !!data.token;
       }),
       catchError(error => {
@@ -125,9 +125,10 @@ export class UserService {
   }
 
   // Guardar datos de usuario en storage
-  private storeUserData(token: string, Id: number): void {
+  private storeUserData(token: string, Id: number, IdPerson:number): void {
   localStorage.setItem("token", token);
   localStorage.setItem("Id", Id.toString());
+  localStorage.setItem("IdPerson", IdPerson.toString());
 }
 
 }
