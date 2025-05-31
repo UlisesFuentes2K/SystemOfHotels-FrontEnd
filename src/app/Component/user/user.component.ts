@@ -34,5 +34,9 @@ export class UserComponent implements OnInit{
     this.router.navigate(['profile']);
   }
 
+    public Editar(){
+    this.router.navigate(['edit-user']);
+  }
+
 
 }

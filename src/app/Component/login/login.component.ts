@@ -34,6 +34,7 @@ export class LoginComponent {
     })
   }
 
+  
   private alertFailed() {
     Swal.fire({
       title: '¡Error!',
@@ -42,4 +43,27 @@ export class LoginComponent {
       confirmButtonText: 'Aceptar'
     })
   }
+
+  public IrRegistros() {
+      this.router.navigate(['register']);
+
+  }
+
+
+    public IrCambioContrasena() {
+      this.router.navigate(['change_password']);
+
+  }
+
+      public EditarUsuario() {
+      this.router.navigate(['edit-user']);
+
+  }
+
+
+        public EditarPersona() {
+      this.router.navigate(['edit-person']);
+
+  }
+
 }

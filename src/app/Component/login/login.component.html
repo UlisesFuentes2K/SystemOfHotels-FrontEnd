@@ -15,8 +15,12 @@
             </div>
             <div class="problema">
                 <p>Sí tienes problema para iniciar sesión puedes dar click en: <br>
-                    <a href=""> Registrar cuenta</a> o <a href="">He olvidado mi contraseña</a>
-                </p>
+                    <a (click)="IrRegistros()"> Registrar cuenta</a> o <a (click)="IrCambioContrasena()">He olvidado mi contraseña</a>
+                </p> 
+
+                                <p>Si deseas editar el usuario: <br>
+                    <a (click)="EditarUsuario()"> Editar </a> o <a (click)="EditarPersona()"> EditarPersona </a> 
+                </p> 
             </div>
         </form>
     </div>
