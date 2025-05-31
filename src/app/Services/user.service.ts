@@ -103,31 +103,32 @@ export class UserService {
   }
 
   // Validar usuario
-  public validateUser(body: any): Observable<boolean> {
-    console.log('Datos enviados:', body);
+  public validateUser(body:any):Observable<boolean>{
     const url = [this.Api, this.EndPoint, this.Endpoint4].join('/');
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({'Content-Type':'application/json'});
 
-    return this.http.post<any>(url, body, { headers }).pipe(
-      map((response: any) => {
-        const data = response?.$value ?? response;
-        if (data.idTypePerson !== 1) {
-          return false;
+    return this.http.post<any>(url, body, {headers}).pipe(
+      map(response => {
+        const data = response?.$value || response;
+        if(data.idTypePerson !== 1){
+            return false;
         }
-        this.storeUserData(data.token, data.userId, data.idPerson);
+        const rol = data.rol[0];
+        this.storeUserData(data.token, data.userId, data.idPerson, rol);
         return !!data.token;
       }),
-      catchError((error: any) => {
+      catchError(error => {
         console.error("Error de validación de usuario", error);
         return of(false);
       })
-    );
+    )
   }
 
-  // Guardar datos de usuario en localStorage
-  private storeUserData(token: string, Id: number, IdPerson: number): void {
-    localStorage.setItem("token", token);
-    localStorage.setItem("Id", Id.toString());
-    localStorage.setItem("IdPerson", IdPerson.toString());
+  // Guardar datos de usuario en storage
+  private storeUserData(token: string, Id: string, IdPerson:number, rol:any): void {
+  localStorage.setItem("token", token);
+  localStorage.setItem("Id", Id);
+  localStorage.setItem("rol", rol.toString());
+  localStorage.setItem("idPerson", IdPerson.toString());
   }
 }
