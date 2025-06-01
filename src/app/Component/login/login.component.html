@@ -4,23 +4,52 @@
         <form>
             <div class="mb-4 mt-4">
                 <label class="mb-2" for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="sesion.Email">
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email"
+                    [(ngModel)]="sesion.Email">
             </div>
             <div class="mb-3">
                 <label class="mb-2" for="pwd">Contraseña:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" [(ngModel)]="sesion.PasswordHash">
+                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd"
+                    [(ngModel)]="sesion.PasswordHash">
             </div>
             <div class="d-flex justify-content-center">
                 <button type="submit" class="btn btn-primary" (click)="login()">Enviar</button>
             </div>
             <div class="problema">
                 <p>Sí tienes problema para iniciar sesión puedes dar click en: <br>
-                    <a class="link-style" (click)="IrRegistros()"> Registrar cuenta</a> o <a class="link-style"  (click)="IrCambioContrasena()">He olvidado mi contraseña</a>
-                </p> 
+                    <a class="link-style" (click)="IrRegistros()"> Registrar cuenta</a> o <a class="link-style"
+                    data-bs-toggle="modal" data-bs-target="#myModal">He olvidado mi contraseña</a>
+                </p>
 
-                                <p>Si deseas editar el usuario: <br>
-                    <a (click)="EditarUsuario()"> Editar </a> o <a (click)="EditarPersona()"> EditarPersona </a> 
-                </p> 
+                <p>Si deseas editar el usuario: <br>
+
+                    <!-- The Modal -->
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Cambio de comtraseña</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <app-cambio-password></app-cambio-password>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <p>
+                <a (click)="EditarUsuario()"> Editar </a> o <a (click)="EditarPersona()"> EditarPersona </a>
+                </p>
             </div>
         </form>
     </div>

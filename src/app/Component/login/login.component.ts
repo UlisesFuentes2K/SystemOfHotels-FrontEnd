@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CambioPasswordComponent } from '../cambio-password/cambio-password.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, ],
+  imports: [CommonModule, FormsModule, CambioPasswordComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -50,10 +51,6 @@ export class LoginComponent {
   }
 
 
-    public IrCambioContrasena() {
-      this.router.navigate(['change_password']);
-
-  }
 
       public EditarUsuario() {
       this.router.navigate(['edit-user']);

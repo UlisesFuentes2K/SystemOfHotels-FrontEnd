@@ -16,6 +16,7 @@ export class UserComponent implements OnInit{
 
   public user:User | null = null;
   public isEditing = false;
+  public data:any={isActive:false, id:"0"};
   constructor(private userService:UserService, private router:Router){}
 
   ngOnInit(): void {
@@ -44,12 +45,17 @@ export class UserComponent implements OnInit{
      })
    }
  
-   desactivarUser(){
-     this.userService.activeUser(this.user).subscribe({
-       next:(data)=>{console.log("datos enviados: ", data);},
-       error:(error)=>{console.error("Error al enviar los datos: ", error);}
-     })
-   }
+   desactivarUser() {
+    if(this.user){
+      this.data.id= this.user.id || null;
+      if (!this.data.isActive) {
+      this.userService.activeUser(this.data).subscribe({
+        next: (data) => { console.log("datos enviados: ", data); },
+        error: (error) => { console.error("Error al enviar los datos: ", error); }
+      })
+    }
+    }
+  }
  
    cambiarPassword(){
      this.userService.changePassWord(this.user).subscribe({
