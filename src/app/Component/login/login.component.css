@@ -16,7 +16,7 @@
 
 .container{
     width: 50%;
-    height: 65%;
+    height: 72%;
     border: gray solid 1px;
 }
 
@@ -28,4 +28,19 @@ button {
   width: 20%;
   display: block;
   margin: 20px auto; 
+}
+
+.link-style {
+    color: blue; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+.link-style:hover {
+    color: red; 
+    text-decoration: underline; 
+}
+
+a {
+    cursor: pointer;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { Person } from '../Models/person';
 
@@ -38,12 +38,12 @@ export class PersonService {
 
     return this.http.post<any>(url, data, {headers}).pipe(
       map(response => {
-        const data = response?.$value ?? response;
-        return data;
+        return response;
       }),
       catchError(error => {
         console.error("Error al guardar los datos", error); 
-        throw error;})
+        throw error;
+      })
     )
   }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TypeDocument} from '../Models/type-document';
+import { Country } from '../Models/country';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, catchError} from 'rxjs';
 import { environment } from '../../environments/environment.development';
@@ -7,13 +7,13 @@ import { environment } from '../../environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
-export class TypeDocumentService {
+export class CountryService {
   private readonly Api = environment.api;
-  private readonly EndPoint = "TypeDocument";
+  private readonly EndPoint = "Country";
 
   constructor(private http:HttpClient) { }
 
-  public getAllTypeDocument():Observable<TypeDocument[]>{
+  public getAllCountry():Observable<Country[]>{
     const url = [this.Api, this.EndPoint].join('/');
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
