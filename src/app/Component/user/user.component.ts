@@ -30,13 +30,41 @@ export class UserComponent implements OnInit{
       })
   }
 
-  public regresar(){
-    this.router.navigate(['profile']);
-  }
-
-    public Editar(){
-    this.router.navigate(['edit-user']);
-  }
+ cancelar(){
+     this.isEditing = false;
+   }
+ 
+   guardarDatos(){
+     this.userService.putUser(this.user).subscribe({
+       next:(data)=>{
+         console.log("datos enviados: ", data);
+         this.isEditing = false;
+       },
+       error:(error)=>{console.error("Error al enviar los datos: ", error);}
+     })
+   }
+ 
+   desactivarUser(){
+     this.userService.activeUser(this.user).subscribe({
+       next:(data)=>{console.log("datos enviados: ", data);},
+       error:(error)=>{console.error("Error al enviar los datos: ", error);}
+     })
+   }
+ 
+   cambiarPassword(){
+     this.userService.changePassWord(this.user).subscribe({
+       next:(data)=>{console.log("datos enviados: ", data);},
+       error:(error)=>{console.error("Error al enviar los datos: ", error);}
+     })
+   }
+ 
+   editarDatos(){
+     this.isEditing = true;
+   }
+ 
+   public regresar(){
+     this.router.navigate(['user']);
+   }
 
 
 }
