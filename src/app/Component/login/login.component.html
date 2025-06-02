@@ -17,38 +17,8 @@
             </div>
             <div class="problema">
                 <p>Sí tienes problema para iniciar sesión puedes dar click en: <br>
-                    <a class="link-style" (click)="IrRegistros()"> Registrar cuenta</a> o <a class="link-style"
-                    data-bs-toggle="modal" data-bs-target="#myModal">He olvidado mi contraseña</a>
-                </p>
-
-                <p>Si deseas editar el usuario: <br>
-
-                    <!-- The Modal -->
-                <div class="modal" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Cambio de comtraseña</h4>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <app-cambio-password></app-cambio-password>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <p>
-                <a (click)="EditarUsuario()"> Editar </a> o <a (click)="EditarPersona()"> EditarPersona </a>
+                    <a class="link-style" (click)="IrRegistros()"> Registrar cuenta</a> o 
+                    <a class="link-style">Credenciales Olvidadas</a>
                 </p>
             </div>
         </form>

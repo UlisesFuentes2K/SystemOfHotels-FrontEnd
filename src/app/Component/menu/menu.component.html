@@ -7,13 +7,13 @@
     <div class="collapse navbar-collapse" id="mynavbar">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)">Home</a>
+          <a class="nav-link" href="javascript:void(0)" (click)="irHome()">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)" (click)="irProfile()">Mi Perfil</a>
+          <a class="nav-link" href="javascript:void(0)" (click)="irProfile()" *ngIf="isLoggedIn()">Mi Perfil</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Mis Reservas</a>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" *ngIf="isLoggedIn()">Mis Reservas</a>
           <ul class="dropdown-menu navbar-dark bg-dark">
             <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">En Curso</a></li>
             <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Finalizadas</a></li>
@@ -22,9 +22,12 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Promociones</a>
           <ul class="dropdown-menu navbar-dark bg-dark">
-            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Canjear</a></li>
-            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Ver Promociones</a></li>
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Canjear Cupon</a></li>
+            <li><a class="dropdown-item" href="#" style="color: rgb(199, 199, 199);">Nuevas Promociones</a></li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)" (click)="irProfile()">Eventos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="javascript:void(0)">Acerca de</a>
@@ -32,7 +35,13 @@
       </ul>
       <ul class="navbar-nav d-flex">
         <li class="nav-item d-flex">
-          <a class="nav-link" href="javascript:void(0)" >Cerrar Sesión</a>
+          <a class="nav-link" href="javascript:void(0)"  (click)="cerrarSesion()" *ngIf="isLoggedIn()">Cerrar Sesión</a>
+        </li>
+        <li class="nav-item d-flex">
+          <a class="nav-link" href="javascript:void(0)"  (click)="irRegister()" *ngIf="!isLoggedIn()">Registrarse</a>
+        </li>
+        <li class="nav-item d-flex">
+          <a class="nav-link" href="javascript:void(0)"  (click)="irLogin()" *ngIf="!isLoggedIn()">Iniciar Sesión</a>
         </li>
       </ul>   
     </div>

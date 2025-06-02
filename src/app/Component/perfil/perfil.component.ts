@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { Register } from '../../Models/register';
 import { City } from '../../Models/city';
 import { RegisterService } from '../../Services/register.service';
+import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-perfil',
@@ -29,15 +31,31 @@ export class PerfilComponent implements OnInit{
   public ngOnInit(): void {
     const idPerson = parseInt(localStorage.getItem("idPerson") || "-1");
     this.personService.getOneData(idPerson).subscribe({
-      next:(data) =>{this.person = data; console.log("Los datos de person son", this.person);},
+      next:(data) =>{
+        this.datosRegistro();
+        this.person = data; 
+        console.log("Los datos de person son", this.person);},
       error:(error)=>{console.error("Error al obtener los datos: ", error)}
     })
   }
 
+  Alera(){
+            Swal.fire({
+            title: '¡Perfecto!',
+            text: 'Perfil actualizado correctamente.',
+            icon: 'success',
+            timer: 3000,
+            showConfirmButton: false,
+            showClass: {
+                popup: 'animate__animated animate__bounceIn'
+            }
+        });
+      }
+
 guardarDatos(){
     this.personService.putData(this.person).subscribe({
-      next:(data)=>{
-        console.log("datos enviados: ", data);
+      next:()=>{
+        this.Alera();
         this.isEditing = false;
       },
       error:(error)=>{console.error("Error al enviar los datos: ", error);}
@@ -50,6 +68,20 @@ guardarDatos(){
 
   cancelar(){
     this.isEditing = false;
+  }
+
+  datosRegistro(){
+    this.registerService.getRegister().subscribe({
+      next:(data) => {
+        this.register = data;
+        this.onCountryChange(this.idCountry);
+      },
+      error:(error) => {console.error("Error al obtener los datos", error);}
+    })
+  }
+
+  onCountryChange(idCountry:number) {
+      this.cityfilter = this.register?.city.filter(x => x.idCountry == idCountry) || [];
   }
 
   public adminCuenta(){

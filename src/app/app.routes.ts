@@ -6,23 +6,19 @@ import { HomeComponent } from './Component/home/home.component';
 import { RegistroComponent } from './Component/registro/registro.component';
 import { PerfilComponent } from './Component/perfil/perfil.component';
 import { UserComponent } from './Component/user/user.component';
-import { EditUserComponent } from './Component/edit-user/edit-user.component';
-import { EditPersonComponent } from './Component/edit-person/edit-person.component';
-
+import { authGuard } from './Auth/auth.guard';
 export const routes: Routes = [
-    {path: '', redirectTo: 'login', pathMatch: 'full' },
+    {path: '', redirectTo: 'home', pathMatch: 'full' },
     {path:'register', component: RegistroComponent},
     {path:'login', component: LoginComponent},
     {path:'change_password', component:CambioPasswordComponent},
-    {path:'edit-user', component:EditUserComponent},
-        {path:'edit-person', component:EditPersonComponent},
     {
         path:'',
         component: MenuComponent,
         children:[
-            {path:'profile', component: PerfilComponent},
+            {path:'profile', component: PerfilComponent, canActivate:[authGuard]},
             {path:'home', component:HomeComponent},
-            {path:'user', component:UserComponent}
+            {path:'user/:id', component:UserComponent, canActivate:[authGuard]}
         ]
     },
     {path:'**', redirectTo:'login'}

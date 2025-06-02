@@ -13,6 +13,7 @@ export class UserService {
   private readonly Endpoint2 = "active";
   private readonly Endpoint3 = "change/password";
   private readonly Endpoint4 = "validation";
+  private readonly Endpoint5 = "logout";
 
   constructor(private http: HttpClient) {}
 
@@ -103,32 +104,59 @@ export class UserService {
   }
 
   // Validar usuario
-  public validateUser(body:any):Observable<boolean>{
+  public validateUser(body:any):Observable<string>{
     const url = [this.Api, this.EndPoint, this.Endpoint4].join('/');
     const headers = new HttpHeaders({'Content-Type':'application/json'});
 
     return this.http.post<any>(url, body, {headers}).pipe(
-      map(response => {
-        const data = response?.$value || response;
-        if(data.idTypePerson !== 1){
-            return false;
+      map(res => {
+        if(res.response.respuesta === "OK"){
+          if(res.response.idTypePerson != 1){
+            return "Credenciales inaccesibles";
+          }
+          const rol = res.response.rol[0];
+          this.storeUserData(res.response.token, res.response.id, res.response.idPerson, rol);
         }
-        const rol = data.rol[0];
-        this.storeUserData(data.token, data.userId, data.idPerson, rol);
-        return !!data.token;
+        return res.response.respuesta;
       }),
       catchError(error => {
         console.error("Error de validación de usuario", error);
-        return of(false);
-      })
+        throw "error inesperado";
+      }) 
     )
   }
-
-  // Guardar datos de usuario en storage
-  private storeUserData(token: string, Id: string, IdPerson:number, rol:any): void {
-  localStorage.setItem("token", token);
-  localStorage.setItem("Id", Id);
-  localStorage.setItem("rol", rol.toString());
-  localStorage.setItem("idPerson", IdPerson.toString());
-  }
+  
+    // Guardar datos de usuario en storage
+    private storeUserData(token: string, Id: string, IdPerson:number, rol:any): void {
+    localStorage.setItem("token", token);
+    localStorage.setItem("Id", Id);
+    localStorage.setItem("rol", rol.toString());
+    localStorage.setItem("idPerson", IdPerson.toString());
+    }
+  
+    //Cerrar sesión de usuario
+     public logoutUser(Id:string): Observable<boolean> {
+        const url = [this.Api, this.EndPoint, this.Endpoint5, Id].join('/');
+        const token = localStorage.getItem('token'); 
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        });
+    
+        return this.http.put<any>(url, {}, { headers }).pipe(
+            map(() => {
+    
+                // Eliminar datos de sesión en el frontend
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
+                localStorage.removeItem('idPerson');
+                localStorage.removeItem('rol');
+                return true;
+            }),
+            catchError(error => {
+                console.error('Error al cerrar sesión', error);
+                return of(false);
+            })
+        ); 
+    }
 }
