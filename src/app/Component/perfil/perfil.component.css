@@ -5,7 +5,7 @@
 
 .container{
     width: 80%;
-    height: 92%;
+    height: 92%; 
     border: gray solid 1px;
     padding: 2% 8%;
 }
@@ -17,5 +17,14 @@
 
 button{
     width: 20%;
-    margin: 5px;
+    margin: 3% 2%;
+}
+
+.check{
+    display: flex;
+    justify-content: left;
+}
+
+.check .ck{
+    margin: 2%;
 }
